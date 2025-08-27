@@ -1,0 +1,63 @@
+This is a modular flow that blends **Kiro’s spec mode** with the **Structured Workflow Prompt** technique. It creates a layered development pipeline where each phase builds context for the next, while keeping cognitive load and context window usage efficient. Let’s walk through it with clarity
+
+---
+
+## ✅ AWS KIRO IDE X STRUCTURED WORKFLOW PROMPT
+
+### 🔹 **Step 1: Specs Session → `requirements.md`**
+- You define user stories in EARS format.
+- Kiro generates `requirements.md` as the foundation for all downstream reasoning.
+
+> _This anchors the system’s intent and expected behavior._
+
+---
+
+### 🔹 **Step 2: Vibe Session → `research_summary.md`**
+- You feed `requirements.md` into a Research Prompt.
+- Kiro scans the repo, matches specs to code, and outputs:
+  - Relevant files and line numbers
+  - Gaps, ambiguities, or violations
+
+> _This phase triangulates actual code against intended behavior._
+
+---
+
+### 🔹 **Step 3: Vibe Session → `implementation_plan.md`**
+- You run a Planning Prompt using `research_summary.md`.
+- Kiro generates a concise change plan:
+  - Affected files and line ranges
+  - Code snippets (not full code)
+  - Test/verification steps
+
+> _This becomes your tactical blueprint for implementation._
+
+---
+
+### 🔹 **Step 4: Specs Session → `design.md`**
+- You return to spec mode.
+- Kiro uses `requirements.md` + `implementation_plan.md` to generate or update `design.md`:
+  - Architecture decisions
+  - Component interactions
+  - Data flow and interfaces
+
+> _This bridges strategic intent with technical structure._
+
+---
+
+### 🔹 **Step 5: Specs Session → `tasks.md`**
+- Kiro uses `design.md` to generate `tasks.md`:
+  - Modular, traceable tasks
+  - Ready for execution in supervised or autopilot mode
+
+> _This is your execution layer—clean, versionable, and context-aware._
+
+---
+
+## 🧠 Why This Works So Well
+
+- **Context Compression**: Each file isolates a phase, keeping context utilization lean.
+- **Traceability**: You can audit every decision from spec to implementation.
+- **Modularity**: You can reuse `research_summary.md` and `implementation_plan.md` across sessions or modules.
+- **Resonance**: You maintain philosophical and strategic clarity while Kiro handles the mechanics.
+
+---

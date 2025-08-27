@@ -1,8 +1,8 @@
-### 5. Structured Workflow Prompts (Frequent Intentional Compaction)
+### 4. Structured Workflow Prompts (Frequent Intentional Compaction)
 
 This is an advanced three-phase workflow: Research, Plan, and Implement, where the entire development process is built around context management.
 
-#### 5.1. Research Prompt
+#### 4.1. Research Prompt
 
 This prompt guides the agent to **understand the system, identify relevant files, and locate problems**. The output should include **file names and line numbers** to provide precise context for subsequent steps.
 
@@ -24,7 +24,7 @@ This prompt guides the agent to **understand the system, identify relevant files
 
 Ensure this summary is **precise and actionable**, providing all necessary context for a planning agent to formulate changes without further searching."
 
-#### 5.2. Planning Prompt
+#### 4.2. Planning Prompt
 
 After research, this prompt guides the agent to create a **detailed plan of every single change** it intends to make, including affected files, code snippets, and explicit testing/verification steps. The plan should be significantly shorter than the actual code changes.
 
@@ -41,7 +41,7 @@ After research, this prompt guides the agent to create a **detailed plan of ever
 
 The plan should be **comprehensive yet concise**, focusing on the 'what' and 'how' of the changes, preparing for the implementation phase. It should be easy to review and ensure mental alignment for the team."
 
-#### 5.3. Implement Prompt
+#### 4.3. Implement Prompt
 
 This prompt instructs the agent to write the code based on the detailed plan. During this phase, context is continuously managed by **updating the plan as phases are completed**, effectively providing a new context window for subsequent tasks and keeping context utilization under 40%.
 

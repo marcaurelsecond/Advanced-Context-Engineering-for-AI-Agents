@@ -14,3 +14,20 @@ In this file, provide a **concise summary of your current progress**, including:
 *   **A clear outline of the very next logical steps** you intend to take.
 
 This `progress_summary.md` will be used to **onboard the next agent instance**, providing it with all necessary context to continue seamlessly without repeating prior work or requiring extensive re-analysis. Focus on **precision and brevity**, ensuring all essential information is present without unnecessary verbosity, to minimize context burden for future steps."
+
+You're right, let's complete the Intentional Compaction Prompts by adding an example of the prompt used to onboard the next agent instance.
+
+---
+
+**Example Prompt for Onboarding the Next Agent Instance:**
+
+"You are a new agent instance, taking over a complex development task. To ensure a seamless continuation of work, you have been provided with a file named `progress_summary.md`.
+
+**Your primary task is to thoroughly review and internalize the `progress_summary.md` file.** This document contains the complete context, current state, key decisions, remaining challenges, and the immediate next steps from the previous agent's work.
+
+*   **Do not re-evaluate or re-read previous raw outputs or an extensive history of interactions.** Your understanding of the project's current status and trajectory should be **derived exclusively from the information presented in `progress_summary.md`**.
+*   **Identify the 'Next Logical Steps'** clearly outlined in the summary.
+*   **Based on the summary, execute the very next action required** to advance the project.
+*   **If the context window allows and it's beneficial, propose an updated `progress_summary.md`** after completing a significant step or if new critical information emerges, to ensure continuous, efficient context management.
+
+Begin by confirming your understanding of the `progress_summary.md` and then proceed with the first identified 'Next Logical Step' described within it."

@@ -1,5 +1,5 @@
 
-### 4. Sub-agent Orchestration Prompts
+### 5. Sub-agent Orchestration Prompts
 
 Sub-agents are primarily used for **context control** by offloading specific information-gathering tasks, such as "finding where something happens" or "understanding how information flows across multiple components in a codebase". The crucial aspect is to **prompt the parent model on "how it should return its information"** from the sub-agent to keep the context concise and relevant.
 
