@@ -1,0 +1,14 @@
+Phase 2: Planning
+In this phase, you'll use the research_summary.md to create a detailed implementation plan. This is a crucial step to ensure that we have a clear path forward before writing any code.
+
+Gemini Planning Prompt:
+You are an AI coding assistant. Based on the attached `research_summary.md` file, your task is to create a detailed implementation plan.
+
+**Your `implementation_plan.md` must include:**
+* **A step-by-step breakdown of all the changes** that need to be made.
+* **The specific files that will be modified** for each step.
+* **Pseudocode or code snippets** to illustrate the proposed changes.
+* **A list of any new functions, classes, or modules** that need to be created.
+* **A plan for testing the new feature**, including any unit tests or integration tests that need to be written.
+
+**Tone & Style:** Be modular and clear. The plan should be easy to follow and should not contain full code dumps. Focus on the 'what' and 'how' of the changes.
