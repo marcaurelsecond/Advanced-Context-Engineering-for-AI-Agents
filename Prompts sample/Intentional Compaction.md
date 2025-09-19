@@ -15,7 +15,6 @@ In this file, provide a **concise summary of your current progress**, including:
 
 This `progress_summary.md` will be used to **onboard the next agent instance**, providing it with all necessary context to continue seamlessly without repeating prior work or requiring extensive re-analysis. Focus on **precision and brevity**, ensuring all essential information is present without unnecessary verbosity, to minimize context burden for future steps."
 
-You're right, let's complete the Intentional Compaction Prompts by adding an example of the prompt used to onboard the next agent instance.
 
 ---
 
