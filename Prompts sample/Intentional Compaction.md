@@ -2,16 +2,23 @@
 
 This strategy focuses on **deliberately managing the agent's memory and the file system to control context size**. The core idea is to have the agent generate a **"progress file"** that encapsulates the current state and understanding, which then serves to onboard the next agent iteration. This helps optimize for correctness, completeness, and size, preventing "too much noise" or "bad info" from flooding the context window.
 
+**Enhanced Compaction Trigger:**
+
+"Monitor your context utilization continuously. When you reach 35-40% of your context window, or after completing 3-4 major tasks, initiate compaction by generating `progress_summary.md`.
+
 **Example Prompt for Intentional Compaction:**
 
 "Your current task is nearing a logical checkpoint, or your context window is approaching its limit. To ensure the continuity and efficiency of our work, please **generate or update a file named `progress_summary.md`**.
 
-In this file, provide a **concise summary of your current progress**, including:
-*   **Key findings or discoveries** made so far.
-*   **The current state of the code or system** you are working on.
-*   **Any significant decisions** or assumptions made.
-*   **The most critical remaining challenges** or unresolved issues.
-*   **A clear outline of the very next logical steps** you intend to take.
+Include these specific sections:
+*   **Completed Tasks**: What's been finished with verification status
+*   **Current State**: Exact file modifications and system status  
+*   **Key Decisions**: Why certain approaches were chosen with rationale
+*   **Blockers Resolved**: What obstacles were overcome and how
+*   **Next 2-3 Steps**: Immediate actionable items with specific file paths
+*   **Context for Handoff**: Critical information the next agent needs
+*   **Risk Assessment**: Potential issues or dependencies to watch
+*   **Testing Status**: What's been validated and what still needs testing
 
 This `progress_summary.md` will be used to **onboard the next agent instance**, providing it with all necessary context to continue seamlessly without repeating prior work or requiring extensive re-analysis. Focus on **precision and brevity**, ensuring all essential information is present without unnecessary verbosity, to minimize context burden for future steps."
 
@@ -30,3 +37,22 @@ This `progress_summary.md` will be used to **onboard the next agent instance**, 
 *   **If the context window allows and it's beneficial, propose an updated `progress_summary.md`** after completing a significant step or if new critical information emerges, to ensure continuous, efficient context management.
 
 Begin by confirming your understanding of the `progress_summary.md` and then proceed with the first identified 'Next Logical Step' described within it."
+
+**Success Metrics for Compaction:**
+- Progress summary is under 500 words but contains all critical information
+- Next agent can continue without asking clarifying questions
+- No important context or decisions are lost
+- File paths and technical details are specific and actionable
+
+**Failure Recovery:**
+If the compacted summary is insufficient:
+- Include specific line numbers and code snippets for context
+- Add environment setup instructions if configuration changed
+- Document any temporary workarounds or patches applied
+- List exact versions of dependencies or tools used
+
+**Context Window Management:**
+- Aim to keep context utilization under 40% after compaction
+- Archive detailed logs and outputs in separate files if needed
+- Reference external documentation or specs rather than copying them
+- Use bullet points and structured formatting for quick scanning

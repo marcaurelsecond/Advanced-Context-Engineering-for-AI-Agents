@@ -17,10 +17,14 @@ This prompt guides the agent to **understand the system, identify relevant files
 4.  **Tracing the data flow** of an existing event from its trigger point to its final storage or reporting mechanism.
 
 **Generate a detailed `research_summary.md` file** that includes:
-*   A high-level overview of the analytics system architecture.
-*   **A list of all relevant files with their full paths.**
-*   **Specific code snippets and line numbers** indicating key integration points or areas of interest for the `UserActivity` event.
-*   A clear explanation of how the data flows.
+*   **System Map**: Visual or textual representation of component relationships
+*   **File Inventory**: Complete list with file paths, primary functions, and dependencies
+*   **Integration Points**: Exact line numbers where new code should be added
+*   **Data Flow Diagram**: How information moves through the system
+*   **Risk Assessment**: Potential breaking changes or side effects
+*   **Dependency Analysis**: What other systems/modules could be affected
+*   **Existing Patterns**: Current coding conventions and architectural patterns to follow
+*   **Test Coverage**: What testing infrastructure exists and how to extend it
 
 Ensure this summary is **precise and actionable**, providing all necessary context for a planning agent to formulate changes without further searching."
 
@@ -36,6 +40,11 @@ After research, this prompt guides the agent to create a **detailed plan of ever
 *   **A clear, step-by-step breakdown of every single change** required to integrate the `UserActivity` event.
 *   For each change, **specify the exact file path(s)** that will be modified.
 *   **Provide snippets of the code** that will be added, modified, or removed, clearly indicating where these changes will occur.
+*   **Rollback Strategy**: How to undo changes if something breaks
+*   **Testing Hierarchy**: Unit → Integration → System test order
+*   **Performance Impact**: Expected resource usage changes
+*   **Security Considerations**: Authentication, authorization, data validation
+*   **Compatibility Check**: Ensure changes work with existing integrations
 *   **Outline specific test cases and verification steps** for each part of the implementation, ensuring the `UserActivity` event is correctly triggered, structured, and processed.
 *   **Describe how existing functionality will be preserved** and any potential side effects mitigated.
 
@@ -52,7 +61,15 @@ This prompt instructs the agent to write the code based on the detailed plan. Du
 Your task is to **execute this plan by writing the necessary code changes**.
 
 **Follow the plan precisely, making changes to the specified files and implementing the provided code snippets.**
-*   As you complete each major step outlined in the `implementation_plan.md`, **update the plan itself** to mark that phase as `[DONE]` and provide a brief confirmation of its completion.
+
+For each completed step, update the plan with:
+*   **Completion Timestamp**: When the step was finished
+*   **Files Modified**: Exact paths and line ranges changed  
+*   **Tests Added/Updated**: Specific test cases implemented
+*   **Verification Results**: Pass/fail status of validation steps
+*   **Context Usage**: Current percentage of context window used
+*   **Next Step Prep**: Any setup needed for the following task
+
 *   **Continuously monitor your context utilization.** If you approach 40% of the context window, compact your progress by updating the `implementation_plan.md` with your current status and focus on the next distinct phase described in the plan.
 *   **Generate all specified unit tests** to verify the functionality of your changes.
 

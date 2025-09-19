@@ -32,3 +32,16 @@ Current Context to Include:
 
 **Template Structure:**
 'Previous session failed because [specific issue]. Do NOT attempt [failed approach]. Instead, focus on [preferred approach]. Current state: [file/config status]. Goal: [clear objective].'
+
+**Success Metrics:**
+- New AI session can start immediately without asking clarifying questions
+- Failed approaches are clearly documented and avoided
+- Technical context is complete and actionable
+- Next steps are unambiguous and specific
+
+**Failure Recovery:**
+If the handoff prompt is unclear, include:
+- Screenshots of error states
+- Exact command sequences that failed
+- Environment configuration details
+- Dependency versions and conflicts
