@@ -17,5 +17,11 @@ Here are the different categories of prompts and related strategies:
     ◦ A parent model can be prompted to utilize a sub-agent, for instance, to "find where something happens" or "understand how information flows across multiple components in a codebase".
     ◦ Crucially, the parent model must be prompted on "how it should return its information" from the sub-agent to ensure the output is concise and relevant, preventing the parent agent from being burdened with excessive context from the sub-agent's search.
 
+• Quality Assurance Prompts: These prompts are designed to ensure that AI didn't break anything during a coding session by systematically reviewing code changes for unintended breakage.
+    ◦ Focus on detecting file truncations, accidental deletions, and structural breaks rather than evaluating intended enhancements.
+    ◦ Use git-based analysis to compare against a known working baseline, flagging files with substantial deletions or size reductions.
+    ◦ Prioritize critical files (configuration, CSS, core services) over feature files to catch high-impact issues first.
+    ◦ Generate actionable findings with specific restoration commands and risk assessments for development team handoff.
+
 
 The effectiveness of these prompts relies on recognizing that a misunderstanding at the research phase (a bad line of research) can lead to thousands of bad lines of code, while a bad part of a plan can lead to hundreds. Therefore, focusing on specifying the right problem and understanding the system through these structured prompts yields greater returns than solely focusing on the code itself
