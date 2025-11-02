@@ -25,14 +25,16 @@ git diff --numstat [baseline] HEAD
 git diff [baseline] HEAD <filename>
 ```
 
-**For each flagged file, provide:**
-1. File path
-2. Lines deleted (actual number)  
-3. Risk level (CRITICAL/MEDIUM/LOW)
-4. What was removed (summary)
-5. Recommendation (restore/keep/detailed review needed)
+**For each flagged file, provide a "Verify and Fix" prompt:**
 
-**Save findings to `code_review_findings.md` with commit hashes for traceability.**
+Format: "Verify this issue exists and fix it: [Clear description of what was deleted/broken and why it's problematic]. [Specific impact on functionality]. [What should be restored/fixed]. @[filename] ([line numbers if known])"
+
+Example: "Verify this issue exists and fix it: The authentication middleware configuration was completely removed from next.config.js, which will break all protected routes. This causes users to bypass login requirements and access restricted pages. The middleware configuration should be restored to enforce authentication on /dashboard/* and /admin/* routes. @next.config.js (lines 15-28)"
+
+**Save all findings to `code_review_findings.md` with:**
+- Commit hashes for traceability
+- Each issue as a separate "Verify and fix" prompt
+- Priority order (CRITICAL issues first)
 
 Priority order: Configuration files → Core services → UI components → New features."
 
@@ -48,17 +50,31 @@ Check for:
 
 Priority: config files, CSS, services over features.
 
-Show: file name, deletion count, what was removed, risk level, recommendation (restore/review).
+Output each issue as: "Verify this issue exists and fix it: [problem description]. [impact]. [solution]. @[filename] ([lines])"
 
 Ignore: docs, ideas, locale files, generated files.
 
 Save findings to `code_review_findings.md` with commit hashes for traceability."
 
+**Example Output Format:**
+
+```
+## Code Review Findings - Commit abc123f
+
+### CRITICAL Issues:
+Verify this issue exists and fix it: The entire CSS reset and global styles were removed from globals.css, causing complete UI breakdown across the application. This makes all components lose their styling and layout structure. The global styles, CSS variables, and Tailwind imports should be restored. @globals.css (lines 1-45)
+
+Verify this issue exists and fix it: Database connection configuration was deleted from next.config.js, breaking all API routes that depend on database access. This causes 500 errors on /api/* endpoints. The database URL and connection pool settings should be restored. @next.config.js (lines 8-15)
+
+### MEDIUM Issues:
+Verify this issue exists and fix it: The UserProfile component lost its validation logic and error handling, potentially allowing invalid data submission. This could cause form submission failures and poor UX. The validation schema and error boundary should be restored. @components/UserProfile.tsx (lines 45-78)
+```
+
 **Strategic Purpose:**
+- Generate immediately actionable "Verify and fix" prompts for the next agent
 - Catch accidental file truncations and deletions before production
 - Distinguish between intentional refactoring and unintended breakage
-- Provide systematic approach to post-commit quality assurance
-- Enable quick handoff of review findings to development team
+- Enable seamless handoff with context-rich problem descriptions
 
 **Usage Notes:**
 - Run after major refactoring sessions or bulk file operations
