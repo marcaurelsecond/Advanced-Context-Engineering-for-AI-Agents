@@ -35,8 +35,8 @@ START: Do you need to review code changes?
 ```
 
 **Quick Reference:**
-- **PROMPT 1 - Part 1**: Developer documents their changes
-- **PROMPT 1 - Part 2**: Reviewer audits changes for breakage
+- **PROMPT 1A**: Developer documents their changes
+- **PROMPT 1B**: Reviewer audits changes for breakage
 - **PROMPT 2**: Quick self-review (small changes)
 - **PROMPT 2B**: Multi-session cumulative review
 - **PROMPT 3**: Post-fix verification
