@@ -357,9 +357,70 @@ git log --oneline -n 5
 Verify this issue exists and fix it: [new issue description]
 ```
 
-**If all issues resolved:** Confirm with "All critical issues have been resolved. Code is ready for production."
+**If all issues resolved:** 
+- Confirm with "All critical issues have been resolved. Code is ready for production."
+- **Then automatically perform the following finalization steps:**
 
-**If new issues found:** Generate new "Verify and fix" prompts for the next iteration."
+**AUTOMATIC FINALIZATION STEPS (When Ready for Deployment):**
+
+1. **Add Review Metadata Header to `code_review_findings.md`:**
+   - Get the baseline commit hash from Part 1 (or use current HEAD if not specified)
+   - Get current date in YYYYMMDD format
+   - Determine sequence number (check existing files in `code-reviews/` directory for same date, increment)
+   - Add this header at the very top of the file (before Part 1):
+
+```markdown
+## Review Metadata
+- **Review ID:** `{COMMIT_HASH}-{YYYYMMDD}-{SEQUENCE}`
+- **Baseline Commit:** {COMMIT_HASH} ({commit message if available})
+- **Review Date:** {YYYY-MM-DD}
+- **Reviewer:** {QA Automated Review / Agent Name}
+- **Status:** APPROVED - READY FOR DEPLOYMENT
+- **Related Commits:** {list commit hashes if multiple commits in this review}
+```
+
+2. **Create dedicated directory structure:**
+   - Create `code-reviews/` directory if it doesn't exist
+   - Create `code-reviews/{YYYY-MM}/` subdirectory (e.g., `code-reviews/2024-12/`)
+   - Use format: `YYYY-MM` for month organization
+
+3. **Rename and move the file:**
+   - Format: `code_review_findings_{COMMIT_HASH}_{YYYYMMDD}.md`
+   - Move from root to: `code-reviews/{YYYY-MM}/code_review_findings_{COMMIT_HASH}_{YYYYMMDD}.md`
+   - Example: `code-reviews/2024-12/code_review_findings_bf48f9b6_20241219.md`
+
+4. **Stage the renamed file:**
+   - Run: `git add code-reviews/{YYYY-MM}/code_review_findings_{COMMIT_HASH}_{YYYYMMDD}.md`
+   - This creates a permanent record linked to the commit
+   - **Note:** User will commit manually, you only stage the file
+
+**Implementation Steps:**
+1. Read current `code_review_findings.md` file
+2. Extract baseline commit hash from Part 1 (look for "Baseline commit: {hash}")
+3. Get current date: `YYYYMMDD` format
+4. Check `code-reviews/{YYYY-MM}/` directory for existing files with same date to determine sequence number
+5. Add metadata header to the top of the file content
+6. Create directory structure: `code-reviews/{YYYY-MM}/`
+7. Write the file with new name to the new location
+8. Delete the original `code_review_findings.md` from root
+9. Stage the new file with `git add`
+
+**Example Output When Ready:**
+```
+All critical issues have been resolved. Code is ready for production.
+
+✓ Finalization completed:
+  - Added review metadata header
+  - Created directory: code-reviews/2024-12/
+  - Renamed and moved: code-reviews/2024-12/code_review_findings_bf48f9b6_20241219.md
+  - Staged file for commit
+  - Ready for manual commit by user
+```
+
+**If new issues found:** 
+- Generate new "Verify and fix" prompts for the next iteration
+- Do NOT perform finalization steps
+- Keep `code_review_findings.md` in root for next iteration"
 
 ---
 
@@ -440,3 +501,8 @@ Session 4 (Final Verification):
 - [ ] Part 3 verification passed
 - [ ] No new issues introduced
 - [ ] Final approval given
+- [ ] Review metadata header added
+- [ ] File renamed with format: `code_review_findings_{COMMIT_HASH}_{YYYYMMDD}.md`
+- [ ] File moved to: `code-reviews/{YYYY-MM}/`
+- [ ] File staged with `git add`
+- [ ] Ready for manual commit by user
